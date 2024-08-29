@@ -6,7 +6,8 @@ RUN apt-get update && \
     nodejs \
     npm
 
-RUN pip3 install jupyterhub notebook
+RUN pip3 install jupyterhub notebook dockerspawner
+
 RUN npm install -g configurable-http-proxy
 
 RUN useradd -ms /bin/bash jupyter
@@ -16,5 +17,4 @@ EXPOSE 8000
 
 COPY jupyterhub_config.py /home/jupyter/
 
-# Start JupyterHub
 CMD ["jupyterhub", "--config", "/home/jupyter/jupyterhub_config.py"]
