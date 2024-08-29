@@ -15,6 +15,10 @@ USER jupyter
 
 EXPOSE 8000
 
-COPY jupyterhub_config.py /home/jupyter/
+RUN mkdir -p /srv/jupyterhub && chown -R 1000:1000 /srv/jupyterhub
 
-CMD ["jupyterhub", "--config", "/home/jupyter/jupyterhub_config.py"]
+# Copy configuration file
+COPY jupyterhub_config.py /srv/jupyterhub/
+
+USER 1000
+CMD ["jupyterhub", "-f", "/srv/jupyterhub/jupyterhub_config.py"]
