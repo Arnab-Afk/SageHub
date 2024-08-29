@@ -1,9 +1,10 @@
-FROM sagemath/sagemath
-
-USER root
+FROM python:3.9-slim
 
 RUN apt-get update && \
-    apt-get install -y python3-pip nodejs npm
+    apt-get install -y \
+    python3-pip \
+    nodejs \
+    npm
 
 RUN pip3 install jupyterhub notebook
 RUN npm install -g configurable-http-proxy
